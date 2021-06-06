@@ -1,0 +1,9 @@
+{
+    "conexion":{
+        "dsn" : "mysql",
+        "host" : "localhost",
+        "database" : "blog",
+        "user" : "root",
+        "password" : ""
+    }
+}
