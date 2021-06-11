@@ -52,7 +52,7 @@ class Post
             {
                 // traemos todos los post en un array asociativo
                 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                //* ejecutar consulta y devolver datos
+                // devolver datos
                 return $posts;
             } else {
                 // error interno del servidor
@@ -86,7 +86,7 @@ class Post
             {
                 // traemos el post en un array asociativo
                 $post = $stmt->fetch(PDO::FETCH_ASSOC);
-                //* ejecutar consulta y devolver datos
+                // devolver datos
                 return $post;
             } else {
                 // error interno del servidor
