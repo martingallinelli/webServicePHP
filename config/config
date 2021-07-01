@@ -2,7 +2,7 @@
     "conexion":{
         "dsn" : "mysql",
         "host" : "localhost",
-        "database" : "blog",
+        "database" : "ws_cursos",
         "user" : "root",
         "password" : ""
     }

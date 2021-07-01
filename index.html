@@ -8,59 +8,38 @@
 </head>
 <body>
     <div class="container">
-        <h1>API REST <br>- Posts -</h1>
+        <h1>API REST <br>- cursos -</h1>
         <div class="divbody">   
             <code>
-            <b>GET</b>  /posts.php?page=<i>{numeroPagina}</i>
+            <b>GET</b>  /service.php
             <br>
-            <b>GET</b>  /posts.php?id=<i>{idPost}</i>
+            <b>GET</b>  /service.php?id=<i>{idPost}</i>
             </code>
 
             <code>
-            <b>POST  /posts.php</b>
+            <b>POST</b>  /service.php
             <br><br>
             {
                 <br> 
-                "title" : "", <b>-> REQUERIDO</b>
-                <br> 
-                "status" : "", <b>-> REQUERIDO</b>
-                <br> 
-                "content": "", <b>-> REQUERIDO</b>
-                <br> 
-                "user_id" : "" <b>-> REQUERIDO</b>       
-                <br>       
-            }
-            </code>
-
-            <code>
-            <b>PUT  /posts.php</b>
-            <br><br>
-            {
-                <br> 
-                "id" : "", <b>-> REQUERIDO</b>
-                <br> 
-                "title" : "", 
-                <br> 
-                "status" : "",
-                <br> 
-                "content": "",
-                <br> 
-                "user_id" : ""       
+                "nombre" : "", <b>-> REQUERIDO</b> 
                 <br>      
             }
             </code>
 
             <code>
-            <b>DELETE  /posts.php</b>
+            <b>PUT</b>  /service.php?id=<i>{idPost}</i>
             <br><br>
-            {       
-                <br>       
-                "id" : "" <b>-> REQUERIDO</b>
+            {
                 <br> 
+                "nombre" : "", <b>-> REQUERIDO</b>
+                <br>      
             }
+            </code>
+
+            <code>
+            <b>DELETE</b>   /service.php?id=<i>{idPost}</i>
             </code>
         </div>
     </div>
-    
 </body>
 </html>
