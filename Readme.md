@@ -17,7 +17,7 @@
     /service.php
 
     {
-        "nombre" : ""       -> REQUERIDO
+        "nombre": ""       -> REQUERIDO
     }
 
 <br>
@@ -27,7 +27,7 @@
     /service.php?id=:idPost
 
     {
-        "nombre" : ""       -> REQUERIDO
+        "nombre": ""       -> REQUERIDO
     }
 
 <br>
