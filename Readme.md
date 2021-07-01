@@ -6,43 +6,32 @@
 
 ### METHOD GET
 
-    /posts.php?page=:numeroPagina
+    /service.php
 
-    /posts.php?id=:idPost
+    /service.php?id=:idPost
 
 <br>
 
 ### METHOD POST
 
-    /posts.php
+    /service.php
 
     {
-        "title" : "",       -> REQUERIDO
-        "status" : "",      -> REQUERIDO
-        "content": "",      -> REQUERIDO
-        "user_id" : ""      -> REQUERIDO
+        "nombre" : ""       -> REQUERIDO
     }
 
 <br>
 
 ### METHOD PUT
 
-    /posts.php
+    /service.php?id=:idPost
 
     {
-        "id" : "",          -> REQUERIDO
-        "title" : "",  
-        "status" : "", 
-        "content": "", 
-        "user_id" : "" 
+        "nombre" : ""       -> REQUERIDO
     }
 
 <br>
 
 ### METHOD DELETE
 
-    /posts.php
-
-    {
-        "id" : ""          -> REQUERIDO
-    }
+    /service.php?id=:idPost
