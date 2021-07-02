@@ -91,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 } else {
     // indicar tipo de respuesta en el header
     header('Content-Type: application/json');
-    // error metodo no permitido
-    $response = Answers::error_405();
+    // error 405 metodo no permitido
+    $response = Answers::mensaje('405', 'Método no permitido');
     // convertir array a string
     echo json_encode($response);
 }

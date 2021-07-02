@@ -5,6 +5,17 @@ require_once './classes/errors/Answers.php';
 
 class Curso
 {
+    // mensajes
+    private static $mensajes = [
+        '200' => 'Ok',
+        '201' => 'Curso guardado',
+        '400' => 'Datos enviados incompletos o con formato incorrecto',
+        '401' => 'Acceso no autorizado',
+        '404' => 'Curso no encontrado',
+        '405' => 'Método no permitido',
+        '500' => 'Error interno del servidor'
+    ];
+
     //! obtener cursos    
     /**
      * listaPost
@@ -29,7 +40,7 @@ class Curso
             return $cursos;
         } else {
             // error 500 interno del servidor
-            return Answers::error_500();
+            return Answers::mensaje('500', self::$mensajes['500']);
         }
     }
 
@@ -46,7 +57,7 @@ class Curso
         if($id == "")
         {
             // error 400 datos incompletos
-            return Answers::error_400();
+            return Answers::mensaje('400', self::$mensajes['400']);
         //* si el id esta ok en los datos de la url
         } else {
             //! conectar la bd
@@ -62,11 +73,11 @@ class Curso
             {
                 // traer el curso en un array asociativo
                 $curso = $stmt->fetch(PDO::FETCH_ASSOC);
-                // devolver curso o no encontrado
-                return $curso ? $curso : Answers::error_404();
+                // devolver curso o 404 no encontrado
+                return $curso ? $curso : Answers::mensaje('404', self::$mensajes['404']);
             } else {
                 // error 500 interno del servidor
-                return Answers::error_500();
+                return Answers::mensaje('500', self::$mensajes['500']);
             }
         }
     }
@@ -84,7 +95,7 @@ class Curso
         if($nombre == '')
         {
             // error 400 datos incompletos
-             return Answers::error_400();
+             return Answers::mensaje('400', self::$mensajes['400']);
         //* si existen los campos en los datos
         } else {
             //* guardar curso 
@@ -93,11 +104,11 @@ class Curso
             if($resp)
             {
                 // devolver 201 elemento guardado
-                return Answers::cod_201();
+                return Answers::mensaje('201', self::$mensajes['201']);
             // si no se guardo
             } else {
                 // error 500 interno del servidor
-                return Answers::error_500();
+                return Answers::mensaje('500', self::$mensajes['500']);
             }
         }
     } 
@@ -143,7 +154,7 @@ class Curso
         if($id == '')
         {
             // error 400 datos incompletos
-            return Answers::error_400();
+            return Answers::mensaje('400', self::$mensajes['400']);
         } else {
             // convertir de json a array
             $datos = json_decode($datos, true);
@@ -151,7 +162,7 @@ class Curso
             if (!isset($datos['nombre']) || empty($datos['nombre']))
             {
                 // error 400 datos incompletos
-                return Answers::error_400();
+                return Answers::mensaje('400', self::$mensajes['400']);
             } else {
                 // guardar valores recibidos
                 $nombre = $datos['nombre'];
@@ -160,12 +171,12 @@ class Curso
                 // si se actualizo
                 if($resp)
                 {
-                    // devolver 200 curso eliminado
-                    return Answers::cod_200('Curso actualizado!');
+                    // devolver 200 curso actualizado
+                    return Answers::mensaje('200', 'Curso actualizado');
                 // si no se guardo
                 } else {
-                    // error 404 interno del servidor
-                    return Answers::error_404();
+                    // error 404 recurso no encontrado
+                    return Answers::mensaje('404', self::$mensajes['404']);
                 }
             }
         }
@@ -198,7 +209,7 @@ class Curso
             return $row;
         } else {
             // error 500 interno del servidor
-            return Answers::error_500();
+            return Answers::mensaje('500', self::$mensajes['500']);
         }
     }
 
@@ -215,7 +226,7 @@ class Curso
         if($id == '')
         {
             // error 400 datos incompletos
-            return Answers::error_400();
+            return Answers::mensaje('400', self::$mensajes['400']);
         } else {
             //* eliminar curso 
             $resp = self::borrarCurso($id);
@@ -223,11 +234,11 @@ class Curso
             if($resp)
             {
                 // devolver 200 curso eliminado
-                return Answers::cod_200('Curso eliminado!');
+                return Answers::mensaje('200', 'Curso eliminado!');
             // si no se guardo
             } else {
-                // error 404 interno del servidor
-                return Answers::error_404();
+                // error 404 recurso no encontrado
+                return Answers::mensaje('404', self::$mensajes['404']);
             }
         }
     }  
@@ -256,7 +267,7 @@ class Curso
             return $row;
         } else {
             // error 500 interno del servidor
-            return Answers::error_500();
+            return Answers::mensaje('500', self::$mensajes['500']);
         }
     }
 }
