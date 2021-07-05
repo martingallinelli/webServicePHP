@@ -1,0 +1,163 @@
+FORMAT: 1A
+HOST: http://localhost:8089/
+
+# API Rest - Cursos
+
+Web Service REST developed in native PHP and MySQL database.  
+Allows you to list all the courses stored in the DB, list a particular course, create a new course, update an existing course, and / or delete a course.
+
+## Courses [/service.php]
+
+### List All Courses [GET]
+
+You may list all courses with this action.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1", 
+                "nombre": "curso 1" 
+            },
+            {
+                "id": "2", 
+                "nombre": "curso 2" 
+            },
+            {
+                "id": "3", 
+                "nombre": "curso 3" 
+            }
+        ]
+        
++ Response 500 (application/json)
+
+        [
+            {
+                "success": "500", 
+                "result": "Error interno del servidor" 
+            }
+        ]
+        
+### Create a New Course [POST]
+
+You may create your own course using this action.    
+It takes a JSON object containing a name.
+
++ Request (application/json)
+
+        {
+            "nombre": "{nombre}"
+        }
+
++ Response 201 (application/json)
+
+        [
+            {
+                "success": "201", 
+                "result": "Elemento guardado!" 
+            }
+        ]
+
++ Response 400 (application/json)
+
+        [
+            {
+                "success": "400", 
+                "result": "Datos enviados incompletos o con formato incorrecto" 
+            }
+        ]
+
++ Response 500 (application/json)
+
+        [
+            {
+                "success": "500", 
+                "result": "Error interno del servidor" 
+            }
+        ]
+        
+## A Course [/service.php?id={id}]
+
+### List A Course [GET]
+
+You may list a course with this action.
+
++ Parameters 
+    + id (number) - ID of the Question in the form of an integer
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1", 
+                "nombre": "curso 1" 
+            }
+        ]
+
++ Response 400 (application/json)
+
+        [
+            {
+                "success": "400", 
+                "result": "Datos enviados incompletos o con formato incorrecto" 
+            }
+        ]
+        
++ Response 404 (application/json)
+
+        [
+            {
+                "success": "404", 
+                "result": "Curso no encontrado" 
+            }
+        ]
+
++ Response 500 (application/json)
+
+        [
+            {
+                "success": "500", 
+                "result": "Error interno del servidor" 
+            }
+        ]
+        
+### Update a Course [PUT]
+
+You may update a course using this action.  
+It takes a JSON object containing a name.
+
++ Parameters
+    + id (number)
+
++ Request (application/json)
+
+        {
+            "nombre": "{nombre}"
+        }
+
++ Response 201 (application/json)
+
+        [
+            {
+                "success": "201", 
+                "result": "Elemento guardado!" 
+            }
+        ]
+
++ Response 400 (application/json)
+
+        [
+            {
+                "success": "400", 
+                "result": "Datos enviados incompletos o con formato incorrecto" 
+            }
+        ]
+
++ Response 500 (application/json)
+
+        [
+            {
+                "success": "500", 
+                "result": "Error interno del servidor" 
+            }
+        ]
