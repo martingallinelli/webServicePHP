@@ -1,8 +1,5 @@
 <?php
 
-require_once './config/Conection.php';
-require_once './classes/errors/Answers.php';
-
 // setear el uso horario de donde estamos
 ini_set('date.timezone', 'America/Argentina/Buenos_Aires');
 
