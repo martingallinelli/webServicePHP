@@ -47,7 +47,12 @@ class Conection
     }
 
     //! obtener datos de la conexion
-    // private: solo se puede ejecutar en Conection.php
+    // private: solo se puede ejecutar en Conection.php    
+    /**
+     * datosConexion
+     *
+     * @return json
+     */
     private static function datosConexion()
     {
         // dirname(): guardar el directorio de este archivo (Conection.php -> config)
