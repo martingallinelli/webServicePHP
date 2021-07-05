@@ -144,10 +144,7 @@ class Curso
     /**
      * insertarCurso
      *
-     * @param  mixed $title
-     * @param  mixed $status
-     * @param  mixed $content
-     * @param  mixed $user_id
+     * @param  mixed $nombre
      * @return bool
      */
     private static function insertarCurso($nombre)
@@ -168,11 +165,12 @@ class Curso
         }
     }
 
-    //! capturar datos y actualizar curso    
+    //! capturar datos y actualizar curso     
     /**
      * actualizarCurso
      *
-     * @param  mixed $json
+     * @param  mixed $datos
+     * @param  mixed $id
      * @return array
      */
     public static function actualizarCurso($datos, $id)
