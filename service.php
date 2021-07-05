@@ -1,6 +1,7 @@
 <?php
 
 require_once 'classes/Curso.php';
+require_once './classes/Log.php';
 
 // $_SERVER['REQUEST_METHOD'] = averiguar el metodo con el que se solicito este documento
 
@@ -91,6 +92,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
      * ? OTRO CASO
      */
     default:
+        // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+        Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 405 | Method: ' . $_SERVER['REQUEST_METHOD']);
         // indicar tipo de respuesta en el header
         header('Content-Type: application/json');
         // error 405 metodo no permitido

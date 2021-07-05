@@ -2,6 +2,7 @@
 
 require_once './config/Conection.php';
 require_once './classes/errors/Answers.php';
+require_once './classes/Log.php';
 
 class Curso
 {
@@ -36,9 +37,13 @@ class Curso
         {
             // traemos todos los cursos en un array asociativo
             $cursos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Se listaron todos los cursos correctamente! HTTP Status Code: 200 | Method: GET obtenerCursos');
             // devolver cursos
             return $cursos;
         } else {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 500 | Method: GET obtenerCursos');
             // error 500 interno del servidor
             return Answers::mensaje('500', self::$mensajes['500']);
         }
@@ -56,6 +61,8 @@ class Curso
         //* si el id esta vacio en los datos de la url
         if($id == "")
         {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 400 | Method: GET obtenerCurso');
             // error 400 datos incompletos
             return Answers::mensaje('400', self::$mensajes['400']);
         //* si el id esta ok en los datos de la url
@@ -73,9 +80,23 @@ class Curso
             {
                 // traer el curso en un array asociativo
                 $curso = $stmt->fetch(PDO::FETCH_ASSOC);
-                // devolver curso o 404 no encontrado
-                return $curso ? $curso : Answers::mensaje('404', self::$mensajes['404']);
+
+                // si encontro el curso
+                if ($curso)
+                {
+                    // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                    Log::saveLog('a+', 'Se listo el curso ' . $id . '! HTTP Status Code: 200 | Method: GET obtenerCurso');
+                    return $curso;
+                // si no encontro el curso
+                } else {
+                    // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                    Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 404 | Method: GET obtenerCurso');
+                    // devolver 404 no encontrado
+                    return Answers::mensaje('404', self::$mensajes['404']);
+                }
             } else {
+                // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 500 | Method: GET obtenerCurso');
                 // error 500 interno del servidor
                 return Answers::mensaje('500', self::$mensajes['500']);
             }
@@ -94,6 +115,8 @@ class Curso
         //* si no existe alguno de los campos en los datos
         if($nombre == '')
         {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 400 | Method: POST nuevoCurso');
             // error 400 datos incompletos
              return Answers::mensaje('400', self::$mensajes['400']);
         //* si existen los campos en los datos
@@ -103,10 +126,14 @@ class Curso
             // si se guardo
             if($resp)
             {
+                // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                Log::saveLog('a+', 'Se guardo el nuevo curso! HTTP Status Code: 201 | Method: POST nuevoCurso');
                 // devolver 201 elemento guardado
                 return Answers::mensaje('201', self::$mensajes['201']);
             // si no se guardo
             } else {
+                // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 500 | Method: POST nuevoCurso');
                 // error 500 interno del servidor
                 return Answers::mensaje('500', self::$mensajes['500']);
             }
@@ -153,6 +180,8 @@ class Curso
         //* si el id recibido esta vacio
         if($id == '')
         {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 400 | Method: PUT actualizarCurso');
             // error 400 datos incompletos
             return Answers::mensaje('400', self::$mensajes['400']);
         } else {
@@ -161,6 +190,8 @@ class Curso
             // si el nombre esta vacio o no existe
             if (!isset($datos['nombre']) || empty($datos['nombre']))
             {
+                // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 400 | Method: PUT actualizarCurso');
                 // error 400 datos incompletos
                 return Answers::mensaje('400', self::$mensajes['400']);
             } else {
@@ -171,10 +202,14 @@ class Curso
                 // si se actualizo
                 if($resp)
                 {
+                    // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                    Log::saveLog('a+', 'Se actualizo el curso ' . $id . '! HTTP Status Code: 200 | Method: PUT actualizarCurso');
                     // devolver 200 curso actualizado
                     return Answers::mensaje('200', 'Curso actualizado');
                 // si no se guardo
                 } else {
+                    // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                    Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 404 | Method: PUT actualizarCurso');
                     // error 404 recurso no encontrado
                     return Answers::mensaje('404', self::$mensajes['404']);
                 }
@@ -208,6 +243,8 @@ class Curso
             $row = $stmt->rowCount();
             return $row;
         } else {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 500 | Method: PUT actualizarCurso');
             // error 500 interno del servidor
             return Answers::mensaje('500', self::$mensajes['500']);
         }
@@ -225,6 +262,8 @@ class Curso
         //* si el id recibido esta vacio
         if($id == '')
         {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 400 | Method: DELETE eliminarCurso');
             // error 400 datos incompletos
             return Answers::mensaje('400', self::$mensajes['400']);
         } else {
@@ -233,10 +272,14 @@ class Curso
             // si se elimino
             if($resp)
             {
+                // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                Log::saveLog('a+', 'Se elimino el curso ' . $id . '! HTTP Status Code: 200 | Method: DELETE eliminarCurso');
                 // devolver 200 curso eliminado
                 return Answers::mensaje('200', 'Curso eliminado!');
             // si no se guardo
             } else {
+                // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+                Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 404 | Method: DELETE eliminarCurso');
                 // error 404 recurso no encontrado
                 return Answers::mensaje('404', self::$mensajes['404']);
             }
@@ -266,6 +309,8 @@ class Curso
             $row = $stmt->rowCount();
             return $row;
         } else {
+            // guardar log (a+, seguir escribiendo sin sobreescribir lo existente)
+            Log::saveLog('a+', 'Ocurrio un error! HTTP Status Code: 500 | Method: DELETE eliminarCurso');
             // error 500 interno del servidor
             return Answers::mensaje('500', self::$mensajes['500']);
         }
